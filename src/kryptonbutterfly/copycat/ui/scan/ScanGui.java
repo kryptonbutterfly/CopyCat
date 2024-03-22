@@ -28,7 +28,7 @@ public class ScanGui extends ObservableDialog<BL, String, Void>
 		setTitle(title);
 		setIconImage(Assets.getQr16Background(getBackground()).getImage());
 		
-		final var camPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+		final var camPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		add(camPanel, BorderLayout.CENTER);
 		camPanel.add(cameraDisplay);
 		

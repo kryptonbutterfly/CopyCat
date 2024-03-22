@@ -45,22 +45,28 @@ final class BL extends Logic<MainGui, Void>
 	void refresh(ActionEvent ae)
 	{
 		gui.if_(
-			gui -> getData().if_(data ->
-			{
-				gui.lblQR.setToolTipText(data);
-				Utils.generateQr(data, Color.BLACK, Color.WHITE, QR_CODE_SIZE, ErrorCorrectionLevel.H)
-					.map(ImageIcon::new)
-					.if_(icon ->
-					{
-						gui.lblQR.setIcon(icon);
-						gui.lblQR.setToolTipText(data);
-					})
-					.else_(() ->
-					{
-						gui.lblQR.setIcon(null);
-						gui.lblQR.setToolTipText(null);
-					});
-			}));
+			gui -> getData()
+				.filter(d -> !d.isEmpty())
+				.if_(data ->
+				{
+					Utils.generateQr(data, Color.BLACK, Color.WHITE, QR_CODE_SIZE, ErrorCorrectionLevel.H)
+						.map(ImageIcon::new)
+						.if_(icon ->
+						{
+							gui.lblQR.setIcon(icon);
+							gui.lblQR.setToolTipText(data);
+						})
+						.else_(() ->
+						{
+							gui.lblQR.setIcon(null);
+							gui.lblQR.setToolTipText(null);
+						});
+				})
+				.else_(() ->
+				{
+					gui.lblQR.setIcon(null);
+					gui.lblQR.setToolTipText(null);
+				}));
 	}
 	
 	void clear(ActionEvent ae)

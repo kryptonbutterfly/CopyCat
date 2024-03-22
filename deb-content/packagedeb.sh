@@ -11,7 +11,7 @@ echo ${pwd}
 
 VERSION_FILE="version.txt"
 
-APP_NAME="copycat"
+APP_NAME="copy-cat"
 PACKAGE_NAME="copycat"
 PACKAGE_VERSION=$(<$VERSION_FILE)
 SOURCE_DIR=$PWD/..

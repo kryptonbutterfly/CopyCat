@@ -15,8 +15,8 @@ public class Prefs extends FileConfig
 	}
 	
 	@Value("main Window")
-	public WindowState mainWindow = new WindowState(100, 100, 316, 415);
+	public WindowState mainWindow = new WindowState(100, 100, 322, 415);
 	
 	@Value("scan Window")
-	public WindowState scanWindow = new WindowState(100, 100, 641, 568);
+	public WindowState scanWindow = new WindowState(100, 100, 650, 578);
 }
