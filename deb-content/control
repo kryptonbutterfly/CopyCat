@@ -1,0 +1,5 @@
+Section: utils
+Priority: optional
+Maintainer: kryptonbutterfly
+Description: An application to generate a qr code from clipboard content or scan a qr code via camera and add the content to the clipboard.
+Architecture: all
