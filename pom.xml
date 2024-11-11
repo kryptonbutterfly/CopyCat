@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>kryptonbutterfly</groupId>
 	<artifactId>copy-cat</artifactId>
-	<version>0.0.1</version>
+	<version>1.0.0</version>
 	<name>CopyCat</name>
 	<description>An application to generate a qr code from clipboard content or
 		scan a qr code via camera and add the content to the clipboard.</description>
@@ -127,9 +127,7 @@
 							<entryPoints>
 								<entryPoint>kryptonbutterfly.copycat.startup.CopyCat</entryPoint>
 							</entryPoints>
-							<outputFile>
-								${project.build.directory}/${project.artifactId}-${project.version}.jar
-							</outputFile>
+							<outputFile>${project.build.directory}/${project.artifactId}-${project.version}.jar</outputFile>
 						</configuration>
 					</execution>
 				</executions>
