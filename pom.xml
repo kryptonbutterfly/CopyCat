@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>kryptonbutterfly</groupId>
 	<artifactId>copy-cat</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<name>CopyCat</name>
 	<description>An application to generate a qr code from clipboard content or
 		scan a qr code via camera and add the content to the clipboard.</description>
@@ -84,7 +84,7 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.8.1</version>
 				<configuration>
-					<release>18</release>
+					<release>21</release>
 					<annotationProcessorPaths>
 						<path>
 							<groupId>org.projectlombok</groupId>

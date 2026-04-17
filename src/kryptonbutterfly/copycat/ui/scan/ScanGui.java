@@ -1,12 +1,12 @@
 package kryptonbutterfly.copycat.ui.scan;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Window;
 import java.util.function.Consumer;
 
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import kryptonbutterfly.copycat.Globals;
@@ -17,9 +17,10 @@ import kryptonbutterfly.util.swing.events.GuiCloseEvent;
 @SuppressWarnings("serial")
 public class ScanGui extends ObservableDialog<BL, String, Void>
 {
-	final JButton btnAbort = new JButton("abort");
+	final static int padding = 5;
 	
-	final JLabel cameraDisplay = new JLabel();
+	final JButton			btnAbort		= new JButton("abort");
+	final ImageComponent	cameraDisplay	= new ImageComponent();
 	
 	public ScanGui(Window owner, ModalityType modality, Consumer<GuiCloseEvent<String>> closeListener, String title)
 	{
@@ -28,12 +29,14 @@ public class ScanGui extends ObservableDialog<BL, String, Void>
 		setTitle(title);
 		setIconImage(Assets.getQr16Background(getBackground()).getImage());
 		
-		final var camPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		final var camPanel = new JPanel(new BorderLayout(padding, padding));
 		add(camPanel, BorderLayout.CENTER);
-		camPanel.add(cameraDisplay);
+		camPanel.add(cameraDisplay, BorderLayout.CENTER);
+		cameraDisplay.setBackground(Color.RED);
 		
 		final var abortPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 		abortPanel.add(btnAbort);
+		abortPanel.setBackground(new Color(0x80, 0x80, 0x80, 0x30));
 		add(abortPanel, BorderLayout.SOUTH);
 		
 		businessLogic.if_(this::init);

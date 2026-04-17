@@ -7,8 +7,6 @@ import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.util.Map;
 
-import javax.swing.ImageIcon;
-
 import com.github.sarxos.webcam.Webcam;
 import com.google.zxing.BinaryBitmap;
 import com.google.zxing.ChecksumException;
@@ -39,6 +37,8 @@ final class BL extends Logic<ScanGui, Void>
 	BL(ScanGui gui)
 	{
 		super(gui);
+		webcam.setCustomViewSizes(Globals.COMMON_16x9);
+		webcam.setViewSize(Globals.p720);
 	}
 	
 	void scanCamera()
@@ -68,7 +68,8 @@ final class BL extends Logic<ScanGui, Void>
 				webcam.open();
 			
 			final var image = webcam.getImage();
-			gui.cameraDisplay.setIcon(new ImageIcon(Utils.mirror(image)));
+			gui.cameraDisplay.setImage(Utils.mirror(image));
+			gui.cameraDisplay.repaint();
 			final var result = decode(image);
 			
 			keepScanning = false;
