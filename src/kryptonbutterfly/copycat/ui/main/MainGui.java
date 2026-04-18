@@ -8,8 +8,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import kryptonbutterfly.copycat.Globals;
 import kryptonbutterfly.copycat.assets.Assets;
+import kryptonbutterfly.copycat.startup.CopyCat;
 import kryptonbutterfly.util.swing.ObservableGui;
 import kryptonbutterfly.util.swing.events.GuiCloseEvent;
 
@@ -27,7 +27,7 @@ public final class MainGui extends ObservableGui<BL, Void, Void>
 	{
 		super(closeListener);
 		setTitle("CopyCat");
-		Globals.prefs.mainWindow.setBoundsAndState(this);
+		CopyCat.prefs().mainWindow.setBoundsAndState(this);
 		
 		btnScan		= new JButton("import", Assets.getCamBackground(getBackground()));
 		btnRefresh	= new JButton("refresh qr", Assets.getQr16Background(getBackground()));

@@ -15,7 +15,7 @@ import javax.swing.ImageIcon;
 
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
-import kryptonbutterfly.copycat.Globals;
+import kryptonbutterfly.copycat.startup.CopyCat;
 import kryptonbutterfly.copycat.ui.scan.ScanGui;
 import kryptonbutterfly.copycat.utils.Utils;
 import kryptonbutterfly.monads.opt.Opt;
@@ -80,7 +80,7 @@ final class BL extends Logic<MainGui, Void>
 	@Override
 	protected void disposeAction()
 	{
-		gui.if_(Globals.prefs.mainWindow::persistBoundsAndState);
+		gui.if_(CopyCat.prefs().mainWindow::persistBoundsAndState);
 	}
 	
 	@SneakyThrows

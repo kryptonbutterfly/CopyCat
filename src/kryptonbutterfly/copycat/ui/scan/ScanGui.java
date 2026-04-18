@@ -9,8 +9,8 @@ import java.util.function.Consumer;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import kryptonbutterfly.copycat.Globals;
 import kryptonbutterfly.copycat.assets.Assets;
+import kryptonbutterfly.copycat.startup.CopyCat;
 import kryptonbutterfly.util.swing.ObservableDialog;
 import kryptonbutterfly.util.swing.events.GuiCloseEvent;
 
@@ -25,7 +25,7 @@ public class ScanGui extends ObservableDialog<BL, String, Void>
 	public ScanGui(Window owner, ModalityType modality, Consumer<GuiCloseEvent<String>> closeListener, String title)
 	{
 		super(owner, modality, closeListener);
-		Globals.prefs.scanWindow.setBounds(this);
+		CopyCat.prefs().scanWindow.setBounds(this);
 		setTitle(title);
 		setIconImage(Assets.getQr16Background(getBackground()).getImage());
 		

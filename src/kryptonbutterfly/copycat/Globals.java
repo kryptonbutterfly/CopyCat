@@ -1,16 +1,25 @@
 package kryptonbutterfly.copycat;
 
-import java.awt.Dimension;
 import java.io.File;
 
-import kryptonbutterfly.copycat.persistence.Prefs;
+import kryptonbutterfly.copycat.persistence.resolutions.NamedResolutionAdapter;
 import kryptonbutterfly.os.BaseDirectory;
 import kryptonbutterfly.os.Platforms;
+import kryptonbutterfly.util.swing.state.PersistableValue;
+import kryptonbutterfly.xmlConfig4J.BindingBuilder;
+import kryptonbutterfly.xmlConfig4J.XmlDataBinding;
+import kryptonbutterfly.xmlConfig4J.XmlTags;
 
 public final class Globals
 {
 	private Globals()
 	{}
+	
+	public static final XmlDataBinding c4j = new BindingBuilder()
+		.addIncludeAnnotation(PersistableValue.class)
+		.setTag(XmlTags.DATA, "config")
+		.addTypeAdapter(new NamedResolutionAdapter())
+		.build();
 	
 	private static final String	CREATOR				= "kryptonbutterfly";
 	private static final String	PROGRAM_NAME		= "copycat";
@@ -18,18 +27,8 @@ public final class Globals
 	
 	private static final BaseDirectory BASE_DIR = Platforms.getOS().baseDir().init(CREATOR, PROGRAM_NAME);
 	
-	private static final File PREFS_FILE = new File(BASE_DIR.stateHome(), "preferences.xml");
-	
-	public static final Prefs prefs = new Prefs(PREFS_FILE);
+	public static final File PREFS_FILE = new File(BASE_DIR.stateHome(), "preferences.xml");
 	
 	public static final int QR_CODE_SIZE = 250;
 	
-	public static final Dimension	p144	= new Dimension(256, 144);
-	public static final Dimension	p240	= new Dimension(426, 240);
-	public static final Dimension	p360	= new Dimension(640, 360);
-	public static final Dimension	p480	= new Dimension(854, 480);
-	public static final Dimension	p720	= new Dimension(1280, 720);
-	public static final Dimension	p1080	= new Dimension(1920, 1080);
-	
-	public static final Dimension[] COMMON_16x9 = { p144, p240, p360, p480, p720, p1080 };
 }

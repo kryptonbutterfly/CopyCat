@@ -2,6 +2,7 @@ package kryptonbutterfly.copycat.startup;
 
 import java.awt.EventQueue;
 import java.awt.Toolkit;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.InaccessibleObjectException;
@@ -11,42 +12,39 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 import kryptonbutterfly.copycat.Globals;
 import kryptonbutterfly.copycat.assets.Assets;
+import kryptonbutterfly.copycat.persistence.Prefs;
 import kryptonbutterfly.copycat.ui.main.MainGui;
 import kryptonbutterfly.monads.opt.Opt;
 import kryptonbutterfly.reflectionUtils.Accessor;
 import kryptonbutterfly.util.swing.ObservableGui;
-import kryptonbutterfly.xmlConfig4J.FileConfig;
+import kryptonbutterfly.xmlConfig4J.persistence.PersistableResource;
+import kryptonbutterfly.xmlConfig4J.persistence.PersistableResourceBuilder;
+import lombok.SneakyThrows;
 
 public class CopyCat
 {
-	public static void main(String[] args)
+	private static PersistableResource<Prefs> prefs;
+	
+	public static void main(String[] args) throws FileNotFoundException, IOException
 	{
-		loadConfig(Globals.prefs);
 		setLookAndFeel();
 		ObservableGui.setDefaultAppImage(Opt.of(Assets.APP_IMAGE));
-		EventQueue.invokeLater(() -> new MainGui(gce -> persistData()));
+		
+		prefs = new PersistableResourceBuilder<>(Globals.c4j, false, Prefs.class)
+			.fromFile(Globals.PREFS_FILE, Prefs::new);
+		
+		EventQueue.invokeLater(() -> new MainGui(gce -> persist()));
 	}
 	
-	private static final void persistData()
+	@SneakyThrows
+	private static void persist()
 	{
-		Globals.prefs.save();
+		prefs.persist();
 	}
 	
-	private static final void loadConfig(FileConfig config)
+	public static Prefs prefs()
 	{
-		if (!config.exists())
-			config.save();
-		else
-		{
-			try
-			{
-				config.load();
-			}
-			catch (IOException e)
-			{
-				e.printStackTrace();
-			}
-		}
+		return prefs.data();
 	}
 	
 	private static void setLookAndFeel()

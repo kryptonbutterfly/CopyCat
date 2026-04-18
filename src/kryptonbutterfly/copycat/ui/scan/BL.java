@@ -16,7 +16,8 @@ import com.google.zxing.NotFoundException;
 import com.google.zxing.common.HybridBinarizer;
 import com.google.zxing.qrcode.QRCodeReader;
 
-import kryptonbutterfly.copycat.Globals;
+import kryptonbutterfly.copycat.persistence.resolutions.NamedResolution;
+import kryptonbutterfly.copycat.startup.CopyCat;
 import kryptonbutterfly.copycat.utils.ImageLuminanceSource;
 import kryptonbutterfly.copycat.utils.KeyTypedAdapter;
 import kryptonbutterfly.copycat.utils.Utils;
@@ -37,8 +38,8 @@ final class BL extends Logic<ScanGui, Void>
 	BL(ScanGui gui)
 	{
 		super(gui);
-		webcam.setCustomViewSizes(Globals.COMMON_16x9);
-		webcam.setViewSize(Globals.p720);
+		webcam.setCustomViewSizes(NamedResolution.allSizes());
+		webcam.setViewSize(CopyCat.prefs().resolution.size());
 	}
 	
 	void scanCamera()
@@ -57,7 +58,7 @@ final class BL extends Logic<ScanGui, Void>
 	protected void disposeAction()
 	{
 		this.keepScanning = false;
-		gui.if_(Globals.prefs.scanWindow::persistBounds);
+		gui.if_(CopyCat.prefs().scanWindow::persistBounds);
 	}
 	
 	private void scan(ScanGui gui)

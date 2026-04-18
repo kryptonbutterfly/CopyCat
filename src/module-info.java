@@ -1,14 +1,14 @@
 module CopyCat
 {
-	exports kryptonbutterfly.copycat.persistence
-			to kryptonbutterfly.ReflectionUtils, kryptonbutterfly.xmlConfig4J, kryptonbutterfly.SwingUtils;
+	opens kryptonbutterfly.copycat.persistence to kryptonbutterfly.xmlConfig4J;
+	opens kryptonbutterfly.copycat.persistence.resolutions to kryptonbutterfly.xmlConfig4J;
 	
 	requires transitive java.desktop;
 	requires lombok;
 	requires transitive kryptonbutterfly.xmlConfig4J;
 	requires kryptonbutterfly.System;
-	requires kryptonbutterfly.ReflectionUtils;
 	requires kryptonbutterfly.mathUtils;
+	requires kryptonbutterfly.ReflectionUtils;
 	requires kryptonbutterfly.Monads;
 	requires transitive kryptonbutterfly.SwingUtils;
 	requires webcam.capture;
